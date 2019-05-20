@@ -7,6 +7,7 @@ import akka.http.scaladsl.model.MediaTypes._
 import akka.http.scaladsl.model._
 import akka.stream._
 import akka.stream.scaladsl._
+import akka.util.Timeout
 import org.slf4j.{Logger, LoggerFactory}
 
 import scala.concurrent._
@@ -15,9 +16,15 @@ import scala.concurrent.duration._
 object Main extends App {
   val logger: Logger = LoggerFactory.getLogger(getClass.getName)
   logger.info("BEGIN - Constructor of class Main from pred package.")
-
+/*
   implicit val system = ActorSystem()
   implicit val materializer = ActorMaterializer()
+*/
+  implicit val system = ActorSystem("barclpred-service")
+  implicit val materializer = ActorMaterializer()
+
+  implicit val executionContext = system.dispatcher
+  implicit val timeout = Timeout(10 seconds)
 
   val shortTimeout = 10.seconds
   val listenPort = 8081

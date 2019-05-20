@@ -27,7 +27,6 @@ libraryDependencies ++= Seq(
   "org.scala-lang" % "scala-library" % "2.11.8",
   "com.madhukaraphatak" %% "java-sizeof" % "0.1",
   "org.scalatest" %% "scalatest" % "3.0.5" % Test,
-  "com.typesafe" % "config" % "1.3.4",
   "com.typesafe.akka" %% "akka-actor" % "2.5.22",
   "com.typesafe.akka" %% "akka-http" % "10.1.8",
   "com.typesafe.akka" %% "akka-stream" % "2.5.22",
