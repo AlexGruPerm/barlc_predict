@@ -14,6 +14,17 @@ import scala.concurrent._
 import scala.concurrent.duration._
 
 
+/**
+  * Runing on cluster with1 work Node.  *
+  *
+  * spark-submit --class pred.Main --master spark://192.168.122.219:6066 --driver-memory 6G --total-executor-cores 1 --num-executors 1 --executor-memory 2G --jars "/opt/spark-2.3.2/jars/spark-cassandra-connector-assembly-2.3.2.jar" --conf "spark.cassandra.connection.host=192.168.122.192"  --deploy-mode=cluster /root/barclpred.jar
+  *
+  * iptables -t nat -A PREROUTING -d 10.241.5.234  -p tcp --dport 8085  -j DNAT --to 192.168.122.192:8085
+  * iptables -I FORWARD -d 192.168.122.192/32 -p tcp -m state --state NEW -m tcp --dport 8085 -j ACCEPT
+  *
+  *
+*/
+
 object Main extends App {
   val logger: Logger = LoggerFactory.getLogger(getClass.getName)
   logger.info("BEGIN - Constructor of class Main from pred package.")
@@ -27,8 +38,8 @@ object Main extends App {
   implicit val timeout = Timeout(10 seconds)
 
   //val shortTimeout = 10.seconds
-  val listenPort = 8081
-  val serverSource = Http().bind(interface = "192.168.122.219", port = listenPort) //0.0.0.0
+  val listenPort = 8085
+  val serverSource = Http().bind(interface = "192.168.122.192", port = listenPort) //0.0.0.0
 
   val reqHandler: HttpRequest => Future[HttpResponse] = {
 
