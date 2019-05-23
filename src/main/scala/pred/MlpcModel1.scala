@@ -103,7 +103,7 @@ class MlpcModel1 {
     val predictionAndLabels = mlpc_predictions.select("prediction", "label")
     val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
     val accur = evaluator.evaluate(predictionAndLabels)
-    logger.info("accur by test data = "+accur)
+    logger.info("accur by test data =  "+accur)
     estimator.fit(ds)
   }
 
